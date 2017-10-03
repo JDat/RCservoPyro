@@ -1,18 +1,22 @@
-#include "tiny.h"
-
+#define treshold 1600
+#define timeout 100000
 #define SerialDebug
 
+#define servoPin 4
+#include "tiny.h"
+
+
 DigitalOut<PortB::pin3> pyro;
-DigitalIn<PortB::pin4> servo;
+
 
 #ifdef SerialDebug
 TextOutStream<SoftwareSerialOut<DigitalOut<PortB::pin1>, 9600> > dbg;
 const char *endl = "\r\n";
 #endif
 
-#define theshold 1600
 
-unsingned long servoVal;
+
+unsigned long servoVal;
 
 void setup() {
 #ifdef SerialDebug  
@@ -22,7 +26,7 @@ void setup() {
 }
 
 void loop() {
-  servoVal=pulseIn(inPin,);
+  servoVal=pulseIn(servoPin,HIGH, timeout);
 #ifdef SerialDebug    
   dbg << "Val: " << servoVal << endl;
 #endif

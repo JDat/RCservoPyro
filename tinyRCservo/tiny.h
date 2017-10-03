@@ -182,6 +182,17 @@ public:
     }
     return *this;
   }
+  
+  TextOutStream<BinaryStream> & print(unsigned long number) {
+    if (number < 0) {
+      print('-');
+      print((unsigned long )(-number));
+    }
+    else {
+      print((unsigned long )(number));
+    }
+    return *this;
+  }
 };
 
 template<class Stream, typename T>
